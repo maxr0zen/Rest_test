@@ -1,0 +1,31 @@
+.article-detail-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.article-detail-container h1 {
+  margin-bottom: 20px;
+}
+
+.article-detail-container p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.article-detail-container button {
+  background-color: #dc3545;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.article-detail-container button:hover {
+  background-color: #c82333;
+}
