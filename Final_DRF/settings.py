@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # URL вашего React приложения
+    "http://localhost:3000",  
 ]
 
 ROOT_URLCONF = 'Final_DRF.urls'
