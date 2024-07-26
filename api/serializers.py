@@ -20,7 +20,7 @@ class LoginSerializer(serializers.Serializer):
         except CustomUser.DoesNotExist:
             raise serializers.ValidationError("Invalid email or password")
 
-        # Используем authenticate, чтобы проверить пароль
+
         if user and user.check_password(password):
             return {
                 'user': user
@@ -54,7 +54,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        # Используем метод create_user для автоматического хеширования пароля
         user = CustomUser.objects.create_user(
             email=validated_data['email'],
             password=validated_data['password'],
