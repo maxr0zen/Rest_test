@@ -18,11 +18,11 @@ const ArticleCreate = () => {
     try {
       await axios.post(
         'http://localhost:8000/articles/create/',
-        { title, content, is_private: isPrivate }, // Не передаем author
+        { title, content, is_private: isPrivate }, 
         { headers: { Authorization: `Token ${token}` } }
       );
       setMessage('Article created successfully!');
-      navigate('/');  // Перенаправление на домашнюю или другую страницу
+      navigate('/'); 
     } catch (error) {
       setMessage('Failed to create article');
       console.error('Create article error:', error.response ? error.response.data : error);
