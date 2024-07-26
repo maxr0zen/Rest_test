@@ -13,10 +13,8 @@ function Logout() {
         await axios.post('http://localhost:8000/logout/', {}, {
           headers: { 'Authorization': `Token ${token}` }
         });
-        // Удалите токен из localStorage
         localStorage.removeItem('token');
       }
-      // Перенаправление на главную страницу
       navigate('/');
     } catch (error) {
       console.error('Error logging out', error);
