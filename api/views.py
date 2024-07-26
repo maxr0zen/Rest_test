@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from .models import Article, CustomUser
 from .serializers import RegisterSerializer, LoginSerializer, ArticleSerializer
 from rest_framework.authtoken.models import Token
-from .permissions import SessionIdPermission  # Импортируйте кастомный пермишн
+from .permissions import SessionIdPermission  
 
 class RegisterView(APIView):
     def post(self, request):
@@ -36,11 +36,10 @@ class LogoutView(APIView):
     permission_classes = [SessionIdPermission]
 
     def post(self, request):
-        # Удалить токен из базы данных
         if request.user.auth_token:
             request.user.auth_token.delete()
 
-        # Очистить поле session_id
+
         request.user.session_id = ''
         request.user.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -58,7 +57,6 @@ class ArticleListView(APIView):
         session_id = request.headers.get('Authorization', '').replace('Token ', '')
         print('session_id',session_id)
         if session_id:
-            # Попробуем найти пользователя с данным session_id
             try:
                 user = CustomUser.objects.get(session_id=session_id)
             except CustomUser.DoesNotExist:
@@ -67,10 +65,8 @@ class ArticleListView(APIView):
             user = None
 
         if user:
-            # Пользователь авторизован - показываем все статьи
             articles = Article.objects.all()
         else:
-            # Пользователь не авторизован - показываем только публичные статьи
             articles = Article.objects.filter(is_private=False)
 
         serializer = ArticleSerializer(articles, many=True)
@@ -113,7 +109,6 @@ class ArticleUpdateView(APIView):
     def put(self, request, pk):
         article = get_object_or_404(Article, pk=pk)
         print(article)
-        # Проверка, что текущий пользователь является автором статьи
         if article.author != request.user:
             return Response({'error': 'You are not the author of this article.'}, status=status.HTTP_403_FORBIDDEN)
 
