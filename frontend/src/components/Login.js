@@ -8,16 +8,16 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Хук для навигации
+  const navigate = useNavigate(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/login/', { email, password });
       const { token } = response.data;
-      localStorage.setItem('token', token); // Сохраняем токен в localStorage
+      localStorage.setItem('token', token); 
       setMessage('Login successful!');
-      navigate('/'); // Перенаправляем на главную страницу после успешного входа
+      navigate('/'); 
     } catch (error) {
       setMessage('Login failed!');
       console.error('Login error:', error.response.data);
